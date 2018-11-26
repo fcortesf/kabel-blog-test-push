@@ -325,4 +325,10 @@ En una aplicación más compleja es necesario estudiar la estrategia de cache pa
 
 Con esto al acceder a la aplicación y una vez que el service worker se ha actualizado dispondremos de la aplicación offline. Si dejamos al navegador sin conexión y recargamos la página veremos que el 'downasaur' no aparece en la misma.
 
-# Manifes e instalación
+## Compatibilidad
+En este caso hay muchos más navegadores que dan soporte a los service worker y al soporte de la API Cache. Es decir, esta funcionalidad funciona en más navegadores que el web push.
+
+Esta funcionalidad está disponible en Android y en iOS por lo que en ambas plataformas móviles dipondremos de la aplicación de forma desconectada.
+
+# Manifest e instalación local
+
