@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 const vapidPublicKey = '< VAPID PUBLIC KEY >';
 const vapidPrivateKey = '< VAPID PRIVATE KEY>';
 webpush.setVapidDetails(
-    'mailto:fcortes@kabel.es',
+    'mailto:someemail@someemaildomain.com',
     vapidPublicKey,
     vapidPrivateKey
 );
