@@ -288,3 +288,41 @@ function unsubscribePush() {
 ```
 
 # Trabajo Offline
+Para el trabajo offline sólamente será necesario trabajar en el cliente. El encargado de almacenar el contenido para ser cacheado será el service worker, pues es quien tiene acceso a la API de Cache. 
+
+El esqueleto básico de la aplicación se ha llevado a cabo siguiendo una 'Application Shell Arquitecture'. La shell sería: la cabecerá, los botones, los estilos básicos y el comportamiento básico. Es decir, los archivos:
+- index.html
+- styles/main.css
+- scripts/index.js
+
+Por lo tanto, precacheando estos archivos se puede conseguir que la aplicación cargue de forma desconectada, obviamente sin conexión las notificaciones push no van a funcionar por lo que hay que desactivar los botones si no hay conexión. Sin embargo, si tuviesemos alguna funcionalidad extra en 'main.js' esta podría seguir funcionando.
+
+Para verificar si hay conexión y los eventos asicados al cambio de offline/online:
+```javascript
+navigator.onLine
+
+window.addEventListener('offline', manageConnection);
+window.addEventListener('online', manageConnection);
+```
+
+Para facilitar el proceso de cache, la librería a utilizar es ['workbox'](https://developers.google.com/web/tools/workbox/). Esta librería es muy potente y permite diferentes estrategias de cache. Por ejemplo, podemos precachear nuestra shell al instalar el service worker y cachear otros recursos sólamente a medida que se pidan. 
+
+Debido a que en esta caso la aplicación contiene sólamente la shell, se deben cachear sólamente esos archivos. Para ello lo primero será importar workbox en el service worker (sw.js). En la primera línea del service worker incorporamos lo siguiente:
+```javascript
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.1/workbox-sw.js');
+```
+A continuación, deben precachearse los archivos y rutas (para la raiz de la web).
+```javascript
+workbox.precaching.precacheAndRoute([
+    { url: 'styles/main.css', revision: '35690' },
+    { url: 'scripts/main.js', revision: '35690' },
+    { url: '/', revision: '35690' },
+]);
+```
+En una aplicación más compleja es necesario estudiar la estrategia de cache para cada uno de los recursos, puesto que cada uno de estos recursos deben ser redescargados y almacenados.
+
+¿Qué es el número de revisión? De forma simplificada, es la versión del archivo en cache. Por lo que si modificamos un archivo debemos modificar su revisión. Workbox es una librería muy completa y nos permite enlazarla en nuestros procesos de generación del front. ¿Cómo? Por ejemplo dispone de plugins en webpack o gulp para generar estos fragmentos de código.
+
+Con esto al acceder a la aplicación y una vez que el service worker se ha actualizado dispondremos de la aplicación offline. Si dejamos al navegador sin conexión y recargamos la página veremos que el 'downasaur' no aparece en la misma.
+
+# Manifes e instalación
