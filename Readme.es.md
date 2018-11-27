@@ -63,10 +63,10 @@ npm i web-push
 ### Web push protocol
 A pesar de que cada navegador posee un servicio de notificaciones, todo el proceso se simplifica gracias al *'Web Push Protocol'*. Una especificación de cómo deben ser las peticiones realizadas a los servicios Push y cómo deben responder los mismos. https://developers.google.com/web/fundamentals/push-notifications/web-push-protocol
 
-### Claves de aplicación (Application Keys)
+### Claves de aplicación (VAPID Keys)
 Para poder cumplir la especificación será necesario identificar nuestra aplicación web, asegurando así que la comunicación de push se produce de forma segura entre el servidor de la aplicación y el cliente. Para ello será necesario cumplir la especificación VAPID ([Voluntary Application Server Identification](https://tools.ietf.org/html/draft-thomson-webpush-vapid-02)). 
 
-VAPID establece una pareja de claves (pública y privada) para realizar las comunicaciones. Servirán también para la identificación de la aplicación en el servicio push.
+VAPID Keys son una pareja de claves (pública y privada) para identificar a una aplicación y sus servidores. Se utilizapara realizar las comunicaciones con los servicios push y asegurar así la procedencia de los mensajes.
 
 Hay varias formas para obtener un par de claves VAPID, en este caso se va a utilizar el cli de web-push. Para ello es necesario en la consola realizar:
  ```
