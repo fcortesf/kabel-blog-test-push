@@ -11,3 +11,5 @@ Source code from the final application deployed on Azure.
 
 # NOTE
 I will update this readme.md with all steps to perform.
+
+See it in [spanish](Readme.es.md)
