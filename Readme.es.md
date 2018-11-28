@@ -11,7 +11,7 @@ Código fuente de la aplicación corriendo en azure.
 
 Para probar en local:
 1. npm i
-2. Establecer VAPID keys.
+2. Establecer [VAPID keys](#claves-de-aplicación-vapid-keys) en el archivo app.js.
 3. npm start
 
 # Introducción
